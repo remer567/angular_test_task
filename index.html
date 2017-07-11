@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>My Shop</title>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <style type="text/css">
+            .scrollable-menu {
+                height: auto;
+                max-height: 200px;
+                overflow-x: hidden;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+    <div class="container">
+        <div class="header">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a>Showing {{}} of {{}}</a></li>
+                        </ul>
+
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a href="#">SORT BY</a></li>
+                            <li class="navbar-form">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default">Цене</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Меню с переключением</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Цене</a></li>
+                                        <li><a href="#">Имени</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li><a href="#">PAGE SIZE</a></li>
+                            <li class="navbar-form">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default">16 per page</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Меню с переключением</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">16 per page</a></li>
+                                        <li><a href="#">32 per page</a></li>
+                                        <li><a href="#">64 per page</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li><a href="#">Page</a></li>
+                            <li class="navbar-form">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default">1</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Меню с переключением</span>
+                                    </button>
+                                    <ul class="dropdown-menu scrollable-menu" role="menu">
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#">6</a></li>
+                                        <li><a href="#">7</a></li>
+                                        <li><a href="#">8</a></li>
+                                        <li><a href="#">9</a></li>
+                                        <li><a href="#">10</a></li>
+                                    </ul>
+                                </div>
+
+                            </li>
+
+                            <li class="navbar-form">
+                                <button type="button" class="btn btn-default"><</button>
+                                <button type="button" class="btn btn-default">></button>
+                            </li>
+
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+
+        </div>
+
+    </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
+    </body>
+</html>
