@@ -33,7 +33,9 @@
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a>Showing {{}} of {{}}</a></li>
+                            <li><a>Showing {{(currentPage - 1) * currentPageSize + 1}}-{{currentPage != numberOfPages ? (currentPage - 1)
+                                * currentPageSize + currentPageSize : numberOfGoods}} of
+                                {{numberOfGoods}}</a></li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
@@ -98,7 +100,7 @@
 
         </div>
 
-        <div class="col col-md-3" ng-repeat="itemGoods in listGoods | limitTo:currentPageSize">
+        <div class="col col-md-3" ng-repeat="itemGoods in listGoods | orderBy:sortParam | limitTo : currentPageSize : (currentPage - 1) * currentPageSize">
             <div class="panel panel-default">
                 <h3 align="center">id: {{itemGoods.id}}</h3>
                 <h3 align="center">title: {{itemGoods.title}}</h3>
@@ -118,24 +120,24 @@
           goods = [
             {
               id: 1,
-              title: 'text',
+              title: 'werwer',
               description: 'text',
               picture: 'pic',
-              price: 0
+              price: 125
             },
             {
               id: 2,
-              title: 'text',
+              title: 'macbook',
               description: 'text',
               picture: 'pic',
-              price: 0
+              price: 34
             },
             {
               id: 3,
-              title: 'text',
+              title: 'acer',
               description: 'text',
               picture: 'pic',
-              price: 0
+              price: 12
             },
             {
               id: 4,
@@ -255,8 +257,77 @@
               description: 'text',
               picture: 'pic',
               price: 0
+            },
+            {
+              id: 21,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 22,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 23,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 24,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 25,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 26,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 27,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 28,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 29,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 30,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
             }
-
           ];
 
 
@@ -265,75 +336,70 @@
 
             $scope.listGoods = goods;
 
-            var numberOfGoods = 0;
+            $scope.numberOfGoods = 1;
 
             if (goods != null) {
-              numberOfGoods = goods.length;
+              $scope.numberOfGoods = goods.length;
             }
 
+            // Init header DropMenu settings
             var headerDropdownMenuItems = {
-              sortBy: ["OneSort", "TwoSort"],
-              pageSize: [2, 4, 8, 16],
+              sortBy: ["none", "name", "price"],
+              pageSize: [8, 12, 16, 20, 24, 28],
               page: [1]
             };
 
+            $scope.sortParam = '';
             $scope.listHeaderDropdownMenuItems = headerDropdownMenuItems;
-
-            // Init header DropMenu settings
             $scope.currentSortBy = headerDropdownMenuItems.sortBy[0];
             $scope.currentPageSize = headerDropdownMenuItems.pageSize[0];
             $scope.currentPage = 1;
-
-            $scope.numberOfPages = Math.ceil(numberOfGoods / $scope.currentPageSize);
+            $scope.numberOfPages = Math.ceil($scope.numberOfGoods / $scope.currentPageSize);
             headerDropdownMenuItems.page.length = 0;
             for (var i = 1; i <= $scope.numberOfPages; i++) {
               headerDropdownMenuItems.page.push(i);
             }
 
             // events
-            $scope.sortByClick = function (typeSort){
+            $scope.sortByClick = function (typeSort) {
               $scope.currentSortBy = typeSort;
-
-              console.log('typeSort: ',typeSort);
+              // none sort
+              if ($scope.currentSortBy == headerDropdownMenuItems.sortBy[0]) $scope.sortParam = '';
+                // name sort
+                else if ($scope.currentSortBy == headerDropdownMenuItems.sortBy[1]) $scope.sortParam = 'title';
+                    // price sort
+                    else if ($scope.currentSortBy == headerDropdownMenuItems.sortBy[2]) $scope.sortParam = 'price';
             };
 
-            $scope.pageSizeClick = function (pageSize){
+            $scope.pageSizeClick = function (pageSize) {
               $scope.currentPageSize = pageSize;
-
-              $scope.numberOfPages = Math.ceil(numberOfGoods / $scope.currentPageSize);
+              $scope.currentPage = 1;
+              $scope.numberOfPages = Math.ceil($scope.numberOfGoods / $scope.currentPageSize);
               headerDropdownMenuItems.page.length = 0;
               for (var i = 1; i <= $scope.numberOfPages; i++) {
                 headerDropdownMenuItems.page.push(i);
               }
-
-              console.log('pageSize: ',pageSize);
             };
 
-            $scope.pageClick = function (page){
+            $scope.pageClick = function (page) {
               $scope.currentPage = page;
-
-              console.log('page: ', page);
             };
 
-            $scope.previousPageClick = function (){
+            $scope.previousPageClick = function () {
               if ($scope.currentPage - 1 != 0)
                 $scope.currentPage--;
-
-              console.log('previousPageClick');
             };
 
-            $scope.nextPageClick = function (){
+            $scope.nextPageClick = function () {
               if ($scope.currentPage + 1 <= headerDropdownMenuItems.page.length)
                 $scope.currentPage++;
-
-              console.log('nextPageClick');
             };
 
-            $scope.isDisablePreviousPageButton = function (){
+            $scope.isDisablePreviousPageButton = function () {
               return $scope.currentPage == 1;
             };
 
-            $scope.isDisableNextPageButton = function (){
+            $scope.isDisableNextPageButton = function () {
               return $scope.currentPage == $scope.numberOfPages;
             };
 
