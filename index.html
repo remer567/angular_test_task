@@ -22,7 +22,6 @@
         <div class="header">
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span class="sr-only">Toggle navigation</span>
@@ -32,18 +31,16 @@
                         </button>
                     </div>
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li><a>Showing {{}} of {{}}</a></li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-
                             <li><a>SORT BY</a></li>
                             <li class="navbar-form">
                                 <div class="btn-group">
-                                    <button id="dropdown-menu-sort-by" type="button" class="btn btn-default">OneSort</button>
+                                    <button id="dropdown-menu-sort-by" type="button" class="btn btn-default">{{currentSortBy}}</button>
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
                                         <span class="sr-only">Меню с переключением</span>
@@ -59,14 +56,14 @@
                             <li><a>PAGE SIZE</a></li>
                             <li class="navbar-form">
                                 <div class="btn-group">
-                                    <button id="dropdown-menu-page-size" type="button" class="btn btn-default">16 per page</button>
+                                    <button id="dropdown-menu-page-size" type="button" class="btn btn-default">{{currentPageSize}} per page</button>
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
                                         <span class="sr-only">Меню с переключением</span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li ng-repeat="itemPageSize in listHeaderDropdownMenuItems.pageSize">
-                                            <a ng-click="pageSizeClick(itemPageSize)">{{itemPageSize}}</a>
+                                            <a ng-click="pageSizeClick(itemPageSize)">{{itemPageSize}} per page</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -75,7 +72,7 @@
                             <li><a>Page</a></li>
                             <li class="navbar-form">
                                 <div class="btn-group">
-                                    <button id="dropdown-menu-page" type="button" class="btn btn-default">1</button>
+                                    <button id="dropdown-menu-page" type="button" class="btn btn-default">{{currentPage}}</button>
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
                                         <span class="sr-only">Меню с переключением</span>
@@ -86,42 +83,30 @@
                                         </li>
                                     </ul>
                                 </div>
-
                             </li>
+                            <li><a>of {{numberOfPages}}</a></li>
 
                             <li class="navbar-form">
-                                <button type="button" class="btn btn-default" ng-click="previousPageClick()"><</button>
-                                <button type="button" class="btn btn-default" ng-click="nextPageClick()">></button>
+                                <button type="button" class="btn btn-default" ng-disabled="isDisablePreviousPageButton()" ng-click="previousPageClick()"><</button>
+                                <button type="button" class="btn btn-default" ng-disabled="isDisableNextPageButton()" ng-click="nextPageClick()">></button>
                             </li>
 
                         </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
+                    </div>
+                </div>
             </nav>
 
         </div>
 
-    </div>
-
-    <div>
-
-
-        <table class="table table-striped" >
-        <thead>
-        <tr>
-            <th>Товар</th>
-            <th>Цена</th>
-            <th>Куплено</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="item in list.items">
-            <td>{{item.purchase}}</td>
-            <td>{{item.price}}</td>
-            <td><input type="checkbox" ng-model="item.done" /></td>
-        </tr>
-        </tbody>
-    </table>
+        <div class="col col-md-3" ng-repeat="itemGoods in listGoods | limitTo:currentPageSize">
+            <div class="panel panel-default">
+                <h3 align="center">id: {{itemGoods.id}}</h3>
+                <h3 align="center">title: {{itemGoods.title}}</h3>
+                <h3 align="center">description: {{itemGoods.description}}</h3>
+                <h3 align="center">picture: {{itemGoods.picture}}</h3>
+                <h3 align="center">price: {{itemGoods.price}}</h3>
+            </div>
+        </div>
 
     </div>
 
@@ -129,54 +114,227 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
         <script>
-          var model = {
-            items: [
-              { purchase: "Хлеб", done: false, price: 15.9 },
-              { purchase: "Масло", done: false, price: 60 },
-              { purchase: "Картофель", done: true, price: 22.6 },
-            ]
-          };
 
-          var headerDropdownMenuItems = {
-            sortBy: ["OneSort","TwoSort"],
-            pageSize: ["16 per page","30 per page","50 per page"],
-            page: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-          };
+          goods = [
+            {
+              id: 1,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 2,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 3,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 4,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 5,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 6,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 7,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 8,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 9,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 10,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 11,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 12,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 13,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 14,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 15,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 16,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 17,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 18,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 19,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            },
+            {
+              id: 20,
+              title: 'text',
+              description: 'text',
+              picture: 'pic',
+              price: 0
+            }
 
-          var currentSettingHeaderDropMenu = {};
-          currentSettingHeaderDropMenu.sortBy = headerDropdownMenuItems.sortBy[0];
-          currentSettingHeaderDropMenu.pageSize = headerDropdownMenuItems.pageSize[0];
-          currentSettingHeaderDropMenu.page = headerDropdownMenuItems.page[0];
+          ];
+
 
           var myShop = angular.module("myShop", []);
           myShop.controller("headerController", function ($scope) {
-            $scope.list = model;
+
+            $scope.listGoods = goods;
+
+            var numberOfGoods = 0;
+
+            if (goods != null) {
+              numberOfGoods = goods.length;
+            }
+
+            var headerDropdownMenuItems = {
+              sortBy: ["OneSort", "TwoSort"],
+              pageSize: [2, 4, 8, 16],
+              page: [1]
+            };
 
             $scope.listHeaderDropdownMenuItems = headerDropdownMenuItems;
-            $scope.currentSettingHeaderDropMenu = currentSettingHeaderDropMenu;
 
+            // Init header DropMenu settings
+            $scope.currentSortBy = headerDropdownMenuItems.sortBy[0];
+            $scope.currentPageSize = headerDropdownMenuItems.pageSize[0];
+            $scope.currentPage = 1;
+
+            $scope.numberOfPages = Math.ceil(numberOfGoods / $scope.currentPageSize);
+            headerDropdownMenuItems.page.length = 0;
+            for (var i = 1; i <= $scope.numberOfPages; i++) {
+              headerDropdownMenuItems.page.push(i);
+            }
+
+            // events
             $scope.sortByClick = function (typeSort){
-              console.log('typeSort: ',typeSort);
-              angular.element(document.querySelector('#dropdown-menu-sort-by')).text(typeSort);
+              $scope.currentSortBy = typeSort;
 
+              console.log('typeSort: ',typeSort);
             };
 
             $scope.pageSizeClick = function (pageSize){
+              $scope.currentPageSize = pageSize;
+
+              $scope.numberOfPages = Math.ceil(numberOfGoods / $scope.currentPageSize);
+              headerDropdownMenuItems.page.length = 0;
+              for (var i = 1; i <= $scope.numberOfPages; i++) {
+                headerDropdownMenuItems.page.push(i);
+              }
+
               console.log('pageSize: ',pageSize);
-              angular.element(document.querySelector('#dropdown-menu-page-size')).text(pageSize);
             };
 
             $scope.pageClick = function (page){
+              $scope.currentPage = page;
+
               console.log('page: ', page);
-              angular.element(document.querySelector('#dropdown-menu-page')).text(page);
             };
 
             $scope.previousPageClick = function (){
+              if ($scope.currentPage - 1 != 0)
+                $scope.currentPage--;
+
               console.log('previousPageClick');
             };
 
             $scope.nextPageClick = function (){
+              if ($scope.currentPage + 1 <= headerDropdownMenuItems.page.length)
+                $scope.currentPage++;
+
               console.log('nextPageClick');
+            };
+
+            $scope.isDisablePreviousPageButton = function (){
+              return $scope.currentPage == 1;
+            };
+
+            $scope.isDisableNextPageButton = function (){
+              return $scope.currentPage == $scope.numberOfPages;
             };
 
           });
