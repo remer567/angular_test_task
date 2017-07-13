@@ -21,6 +21,10 @@ myShop.controller("headerController", function ($scope) {
 
   }*/
 
+  $scope.inputSearchChange = function() {
+    console.log('change');
+  };
+
   if (goods != null) {
     $scope.numberOfGoods = goods.length;
   }
@@ -59,8 +63,6 @@ myShop.controller("headerController", function ($scope) {
     else if ($scope.currentSearchBy == headerDropdownMenuItems.searchBy[1]) $scope.queryBy  = 'title';
     // price sort
     else if ($scope.currentSearchBy == headerDropdownMenuItems.searchBy[2]) $scope.queryBy = 'description';
-
-
   };
 
   $scope.sortByClick = function (typeSort) {

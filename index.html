@@ -36,7 +36,7 @@
                         <li class="navbar-form">
                             <div class="form-group">
                                 <label >Search:</label>
-                                <input ng-model="query[queryBy]" class="form-control" placeholder="input text">
+                                <input ng-model="query[queryBy]" ng-change="inputSearchChange()" class="form-control" placeholder="input text">
                                 <label >by</label>
                             </div>
                             <div class="btn-group">
