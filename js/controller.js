@@ -5,18 +5,36 @@ myShop.controller("headerController", function ($scope) {
 
   $scope.numberOfGoods = 1;
 
+ /* function fzCtrl($rootScope, $scope) {
+
+    $scope.searcher=function(){
+      $( " span " ).removeClass( "red" );
+      var word=$scope.searchWord;
+      if(word){
+        $(document).ready(function(){
+          $("#text").html(function(_, html){
+            return html.replace(new RegExp(word, 'g'), '<span class="red">'+word+'</span>');
+          });
+
+        });}
+      ;}
+
+  }*/
+
   if (goods != null) {
     $scope.numberOfGoods = goods.length;
   }
 
   // Init header DropMenu settings
   var headerDropdownMenuItems = {
-    sortBy: ["none", "name", "price"],
+    searchBy: ['any', 'title', 'description'],
+    sortBy: ['none', 'title', 'price'],
     pageSize: [8, 12, 16, 20, 24, 28, 32],
     page: [1]
   };
 
   $scope.listHeaderDropdownMenuItems = headerDropdownMenuItems;
+  $scope.currentSearchBy = headerDropdownMenuItems.searchBy[0];
   $scope.currentSortBy = headerDropdownMenuItems.sortBy[0];
   $scope.currentPageSize = headerDropdownMenuItems.pageSize[0];
   $scope.currentPage = headerDropdownMenuItems.page[0];
@@ -26,10 +44,25 @@ myShop.controller("headerController", function ($scope) {
     headerDropdownMenuItems.page.push(i);
   }
 
-  //Init sort parametr
+  // init sort parametr
   $scope.sortParam = '';
 
+  // init search parametrs
+  $scope.query = {};
+  $scope.queryBy = '$';
+
   // events
+  $scope.searchByClick = function (searchBy) {
+    $scope.currentSearchBy = searchBy;
+    if ($scope.currentSearchBy == headerDropdownMenuItems.searchBy[0]) $scope.queryBy = '$';
+    // name sort
+    else if ($scope.currentSearchBy == headerDropdownMenuItems.searchBy[1]) $scope.queryBy  = 'title';
+    // price sort
+    else if ($scope.currentSearchBy == headerDropdownMenuItems.searchBy[2]) $scope.queryBy = 'description';
+
+
+  };
+
   $scope.sortByClick = function (typeSort) {
     $scope.currentSortBy = typeSort;
     // none sort

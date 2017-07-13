@@ -3,3 +3,10 @@
     max-height: 200px;
     overflow-x: hidden;
 }
+.navbar-default {
+    text-align:center;
+}
+.navbar-center {
+    display: inline-block;
+    float: none;
+}
