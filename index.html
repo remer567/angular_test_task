@@ -109,8 +109,8 @@
 
                         <li class="navbar-form">
                             <div class="btn-group btn-group">
-                                <button type="button" class="btn btn-primary">Log in</button>
-                                <button type="button" class="btn btn-success">Sign up</button>
+                                <button ng-click="signInButton()" type="button" class="btn btn-primary">Sign in</button>
+                                <button ng-click="signUpButton()" type="button" class="btn btn-success">Sign up</button>
                             </div>
                         </li>
                     </ul>
@@ -167,6 +167,59 @@
             </div>
         </div>
     </div>
+
+    <div id="signInModal" class="modal fade" ng-repeat="itemGoods in listGoods">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Sign in</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="help-block">E-mail:</p>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input id="username" class="form-control input" placeholder="Enter e-mail" required="required" maxlength="100" type="text" name="username" value="">
+                    </div>
+                    <p class="help-block">Password:</p>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                        <input id="password_confirmation" class="form-control input" placeholder="Enter password" required="required" maxlength="60" type="password" name="password_confirmation">
+                    </div>
+                    <p><div class="form-group">
+                        <button type="submit" id="btn-signup" class="btn btn-block btn-primary">Sign in</button>
+                    </div></p>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-block btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <div class="form-group">
+                        <div class="topCushion">If you have not registered yet, <a href="#userregistration" data-toggle="tab">please register</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="signUpModal" class="modal fade" ng-repeat="itemGoods in listGoods">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Sign up</h4>
+                </div>
+                <div class="modal-body">
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

@@ -128,4 +128,17 @@ myShop.controller('mainController', function ($scope, $filter) {
       $(idModalDialog).modal('show');
     });
   };
+
+  $scope.signInButton = function () {
+    $(document).ready(function () {
+      $('#signInModal').modal('show');
+    });
+  }
+
+  $scope.signUpButton = function () {
+    $(document).ready(function () {
+      $('#signUpModal').modal('show');
+    });
+  }
+
 });
