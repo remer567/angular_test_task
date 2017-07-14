@@ -1,9 +1,5 @@
-var myShop = angular.module("myShop", []);
-myShop.controller("headerController", function ($scope) {
-
-  $scope.listGoods = goods;
-
-  $scope.numberOfGoods = 1;
+var myShop = angular.module('myShop', []);
+myShop.controller('mainController', function ($scope, $filter) {
 
  /* function fzCtrl($rootScope, $scope) {
 
@@ -21,82 +17,101 @@ myShop.controller("headerController", function ($scope) {
 
   }*/
 
-  $scope.inputSearchChange = function() {
-    console.log('change');
-  };
-
-  if (goods != null) {
-    $scope.numberOfGoods = goods.length;
-  }
-
-  // Init header DropMenu settings
+  // init navigation menu settings
   var headerDropdownMenuItems = {
-    searchBy: ['any', 'title', 'description'],
-    sortBy: ['none', 'title', 'price'],
-    pageSize: [8, 12, 16, 20, 24, 28, 32],
+    searchBy: [{key: 'any', value:'$'},
+               {key: 'name', value:'name'},
+               {key: 'description', value:'description'}],
+    sortBy: [{key: 'none', value:''},
+             {key: 'name', value:'name'},
+             {key: 'price', value:'price'}],
+    pageSize: [8, 12, 16, 20, 24, 28],
     page: [1]
   };
-
   $scope.listHeaderDropdownMenuItems = headerDropdownMenuItems;
-  $scope.currentSearchBy = headerDropdownMenuItems.searchBy[0];
-  $scope.currentSortBy = headerDropdownMenuItems.sortBy[0];
+  $scope.inputSearch = '';
+  $scope.currentSearchBy = headerDropdownMenuItems.searchBy[0].key;
+  var queryBy = headerDropdownMenuItems.searchBy[0].value;
+  $scope.currentSortBy = headerDropdownMenuItems.sortBy[0].key;
+  var sortParam = headerDropdownMenuItems.sortBy[0].value;
   $scope.currentPageSize = headerDropdownMenuItems.pageSize[0];
   $scope.currentPage = headerDropdownMenuItems.page[0];
-  $scope.numberOfPages = Math.ceil($scope.numberOfGoods / $scope.currentPageSize);
-  headerDropdownMenuItems.page.length = 0;
-  for (var i = 1; i <= $scope.numberOfPages; i++) {
-    headerDropdownMenuItems.page.push(i);
-  }
 
-  // init sort parametr
-  $scope.sortParam = '';
+  // refreshPage function
+  refreshPage = function (isSettingsChanged) {
+    if(isSettingsChanged == true)
+      $scope.currentPage = 1;
 
-  // init search parametrs
-  $scope.query = {};
-  $scope.queryBy = '$';
+    // filtering goods
+    var filteredGoodsOrderBy = $filter('orderBy')(goods, sortParam);
+    query = {};
+    query[queryBy] = $scope.inputSearch;
+    var filteredGoodsSearchBy = $filter('filter')(filteredGoodsOrderBy, query);
+    $scope.listGoods = $filter('limitTo')(filteredGoodsSearchBy,
+                                          $scope.currentPageSize, ($scope.currentPage - 1) * $scope.currentPageSize);
+
+    // update navigation menu parametrs
+    $scope.numberOfGoods = filteredGoodsSearchBy.length;
+    if ($scope.numberOfGoods > 0) {
+      $scope.isNotFound = false;
+      $scope.numberOfPages = Math.ceil($scope.numberOfGoods / $scope.currentPageSize);
+      headerDropdownMenuItems.page.length = 0;
+      for (var i = 1; i <= $scope.numberOfPages; i++)
+        headerDropdownMenuItems.page.push(i);
+    }
+    else {
+      $scope.isNotFound = true;
+      $scope.numberOfPages = 1;
+      headerDropdownMenuItems.page.length = 0;
+      headerDropdownMenuItems.page.push(1);
+    }
+  };
+
+  refreshPage(true);
 
   // events
+  $scope.inputSearchChange = function() {
+    refreshPage(true);
+  };
+
   $scope.searchByClick = function (searchBy) {
     $scope.currentSearchBy = searchBy;
-    if ($scope.currentSearchBy == headerDropdownMenuItems.searchBy[0]) $scope.queryBy = '$';
-    // name sort
-    else if ($scope.currentSearchBy == headerDropdownMenuItems.searchBy[1]) $scope.queryBy  = 'title';
-    // price sort
-    else if ($scope.currentSearchBy == headerDropdownMenuItems.searchBy[2]) $scope.queryBy = 'description';
-  };
+    for (index = 0; index < headerDropdownMenuItems.searchBy.length; index++) {
+      if ($scope.currentSearchBy == headerDropdownMenuItems.searchBy[index].key)
+        queryBy = headerDropdownMenuItems.searchBy[index].value;
+    }
+    refreshPage(true);
+    };
 
   $scope.sortByClick = function (typeSort) {
     $scope.currentSortBy = typeSort;
-    // none sort
-    if ($scope.currentSortBy == headerDropdownMenuItems.sortBy[0]) $scope.sortParam = '';
-    // name sort
-    else if ($scope.currentSortBy == headerDropdownMenuItems.sortBy[1]) $scope.sortParam = 'title';
-    // price sort
-    else if ($scope.currentSortBy == headerDropdownMenuItems.sortBy[2]) $scope.sortParam = 'price';
+    for (index = 0; index < headerDropdownMenuItems.sortBy.length; index++) {
+      if ($scope.currentSortBy == headerDropdownMenuItems.sortBy[index].key)
+        sortParam = headerDropdownMenuItems.sortBy[index].value;
+    }
+    refreshPage(true);
   };
 
   $scope.pageSizeClick = function (pageSize) {
     $scope.currentPageSize = pageSize;
-    $scope.currentPage = 1;
-    $scope.numberOfPages = Math.ceil($scope.numberOfGoods / $scope.currentPageSize);
-    headerDropdownMenuItems.page.length = 0;
-    for (var i = 1; i <= $scope.numberOfPages; i++) {
-      headerDropdownMenuItems.page.push(i);
-    }
+    refreshPage(true);
   };
 
   $scope.pageClick = function (page) {
     $scope.currentPage = page;
+    refreshPage(false);
   };
 
   $scope.previousPageClick = function () {
     if ($scope.currentPage - 1 != 0)
       $scope.currentPage--;
+      refreshPage(false);
   };
 
   $scope.nextPageClick = function () {
-    if ($scope.currentPage + 1 <= $scope.numberOfGoods)
+    if ($scope.currentPage + 1 <= $scope.numberOfPages)
       $scope.currentPage++;
+      refreshPage(false);
   };
 
   $scope.isDisablePreviousPageButton = function () {
@@ -107,4 +122,10 @@ myShop.controller("headerController", function ($scope) {
     return $scope.currentPage == $scope.numberOfPages;
   };
 
+  $scope.openModalDialogButton = function (idModalDialog) {
+    $(document).ready(function() {
+      idModalDialog = '#modalDialog'+idModalDialog;
+      $(idModalDialog).modal('show');
+    });
+  };
 });

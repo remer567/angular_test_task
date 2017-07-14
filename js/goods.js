@@ -1,212 +1,107 @@
 goods = [
   {
     id: 1,
-    title: 'werwer',
-    description: 'text',
-    picture: 'pic',
-    price: 125
+    name: 'Смартфон Apple iPhone SE 32GB',
+    description: 'Диагональ (дюйм): 4 Разрешение (пикс): 1136x640 Встроенная память (Гб): 32 Фотокамера (Мп): 12 Процессор: Apple A9 + сопроцессор M9 Количество ядер: 2',
+    picture: 'img/1.jpg',
+    price: 332.15
   },
   {
     id: 2,
-    title: 'macbook',
-    description: 'text',
-    picture: 'pic',
-    price: 34
+    name: 'Смартфон Samsung Galaxy A7',
+    description: 'Диагональ (дюйм): 5.7 Разрешение (пикс): 1920x1080 Встроенная память (Гб): 32 Фотокамера (Мп): 16 Процессор: Samsung Exynos 7880 Octa Количество ядер: 8',
+    picture: 'img/2.jpg',
+    price: 498.31
   },
   {
     id: 3,
-    title: 'acer',
-    description: 'text',
-    picture: 'pic',
-    price: 12
+    name: 'Смартфон LG G6',
+    description: 'Диагональ (дюйм): 5.7 Разрешение (пикс): 2880x1440 Встроенная память (Гб): 64 Фотокамера (Мп): 13 + 13 (двойная) Процессор: Qualcomm MSM8996 Snapdragon 821 Количество ядер: 4',
+    picture: 'img/3.jpg',
+    price: 863.86
   },
   {
     id: 4,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Sony Xperia XA1 Dual',
+    description: 'Диагональ (дюйм): 5 Разрешение (пикс): 1280x720 Встроенная память (Гб): 32 Фотокамера (Мп): 23 Процессор: MediaTek MT6757 Helio P20 Количество ядер: 8',
+    picture: 'img/4.jpg',
+    price: 365.38
   },
   {
     id: 5,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Смартфон Huawei Honor 8 Lite',
+    description: 'Диагональ (дюйм): 5.2 Разрешение (пикс): 1920x1080 Встроенная память (Гб): 32 Фотокамера (Мп): 12 Процессор: HiSilicon Kirin 655 Количество ядер: 8',
+    picture: 'img/5.jpg',
+    price: 249.07
   },
   {
     id: 6,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Смартфон Samsung Galaxy A3 (2016) SM-A310F',
+    description: 'Диагональ (дюйм): 4.7 Разрешение (пикс): 1280x720 Встроенная память (Гб): 16 Фотокамера (Мп): 13 Количество ядер: 4 Оперативная память (Мб): 1500',
+    picture: 'img/6.jpg',
+    price: 232.46
   },
   {
     id: 7,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Смартфон Sony Xperia X Compact',
+    description: 'Диагональ (дюйм): 4.6 Разрешение (пикс): 1280x720 Встроенная память (Гб): 32 Фотокамера (Мп): 23 Процессор: Qualcomm MSM8956 Snapdragon 650 Количество ядер: 6',
+    picture: 'img/7.jpg',
+    price: 415.23
   },
   {
     id: 8,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Смартфон Huawei Honor 8 Lite',
+    description: 'Диагональ (дюйм): 5.2 Разрешение (пикс): 1920x1080 Встроенная память (Гб): 32 Фотокамера (Мп): 12 Процессор: HiSilicon Kirin 655 Количество ядер: 8',
+    picture: 'img/8.jpg',
+    price: 254.41
   },
   {
     id: 9,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Смартфон LG X cam',
+    description: 'Диагональ (дюйм): 5.2 Разрешение (пикс): 1920x1080 Встроенная память (Гб): 16 Фотокамера (Мп): 13 + 5 (двойная) Количество ядер: 8 Оперативная память (Мб): 2048',
+    picture: 'img/9.jpg',
+    price: 256.48
   },
   {
     id: 10,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Смартфон Samsung Galaxy J5 Prime Duos',
+    description: 'ID: 3366143 Диагональ (дюйм): 5 Разрешение (пикс): 1280x720 Встроенная память (Гб): 16 Фотокамера (Мп): 13 Процессор: Samsung Exynos 7570 Quad Количество ядер: 4',
+    picture: 'img/10.jpg',
+    price: 215.84
   },
   {
     id: 11,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Смартфон Huawei Honor 8 Pro 64GB',
+    description: 'Диагональ (дюйм): 5.7 Разрешение (пикс): 2560x1440 Встроенная память (Гб): 64 Фотокамера (Мп): 12 + 12 (двойная) Процессор: HiSilicon Kirin 960 Количество ядер: 8',
+    picture: 'img/11.jpg',
+    price: 354.21
   },
   {
     id: 12,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Смартфон Huawei Honor 8 64GB',
+    description: 'Диагональ (дюйм): 5.2 Разрешение (пикс): 1920x1080 Встроенная память (Гб): 64 Фотокамера (Мп): 12 + 12 (двойная) Процессор: HiSilicon Kirin 950 Количество ядер: 8',
+    picture: 'img/12.jpg',
+    price: 258.6
   },
   {
     id: 13,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Смартфон Apple iPhone 6 32GB',
+    description: 'Диагональ (дюйм): 4.7 Разрешение (пикс): 1334x750 Встроенная память (Гб): 32 Фотокамера (Мп): 8 Процессор: Apple A8 + сопроцессор M8 Количество ядер: 2',
+    picture: 'img/13.jpg',
+    price: 336.2
   },
   {
     id: 14,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Смартфон Huawei Honor 6C',
+    description: 'Диагональ (дюйм): 5 Разрешение (пикс): 1280x720 Встроенная память (Гб): 32 Фотокамера (Мп): 13 Процессор: Qualcomm MSM8940 Snapdragon 435 Количество ядер: 8',
+    picture: 'img/14.jpg',
+    price: 199.22
   },
   {
     id: 15,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 16,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 17,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 18,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 19,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 20,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 21,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 22,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 23,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 24,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 25,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 26,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 27,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 28,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 29,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
-  },
-  {
-    id: 30,
-    title: 'text',
-    description: 'text',
-    picture: 'pic',
-    price: 0
+    name: 'Смартфон Samsung Galaxy S8+',
+    description: 'Диагональ (дюйм): 6.2 Разрешение (пикс): 2960x1440 Встроенная память (Гб): 64 Фотокамера (Мп): 12 Процессор: Samsung Exynos 8895 Octa Количество ядер: 8',
+    picture: 'img/15.jpg',
+    price: 996.78
   }
 ];

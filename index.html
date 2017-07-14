@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 
-<body ng-controller="headerController">
+<body ng-controller="mainController">
 <div class="container-fluid">
     <div class="header">
         <nav class="navbar navbar-default" role="navigation">
@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-center">
                         <li class="navbar-form">
-                            <label>Showing {{(currentPage - 1) * currentPageSize + 1}}-{{currentPage != numberOfPages ? (currentPage - 1)
+                            <label>Showing {{numberOfGoods > 0 ? (currentPage - 1) * currentPageSize + 1 : 0}}-{{currentPage != numberOfPages ? (currentPage - 1)
                             * currentPageSize + currentPageSize : numberOfGoods}} of
                             {{numberOfGoods}}</label>
                         </li>
@@ -36,7 +36,7 @@
                         <li class="navbar-form">
                             <div class="form-group">
                                 <label >Search:</label>
-                                <input ng-model="query[queryBy]" ng-change="inputSearchChange()" class="form-control" placeholder="input text">
+                                <input ng-model="inputSearch" ng-change="inputSearchChange()" class="form-control" placeholder="input text">
                                 <label >by</label>
                             </div>
                             <div class="btn-group">
@@ -47,7 +47,7 @@
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li ng-repeat="itemSearchBy in listHeaderDropdownMenuItems.searchBy">
-                                        <a ng-click="searchByClick(itemSearchBy)">{{itemSearchBy}}</a>
+                                        <a ng-click="searchByClick(itemSearchBy.key)">{{itemSearchBy.key}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -63,7 +63,7 @@
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li ng-repeat="itemSortBy in listHeaderDropdownMenuItems.sortBy">
-                                        <a ng-click="sortByClick(itemSortBy)">{{itemSortBy}}</a>
+                                        <a ng-click="sortByClick(itemSortBy.key)">{{itemSortBy.key}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -110,21 +110,57 @@
                 </div>
             </div>
         </nav>
-
     </div>
 
-    <div class="col col-md-3" ng-repeat="itemGoods in searchFilteredListGoods = (listGoods | filter:query | orderBy:sortParam)
-    | limitTo : currentPageSize : (currentPage - 1) * currentPageSize">
-        <div class="panel panel-default">
-            <h3 align="center">id: {{itemGoods.id}}</h3>
-            <h3 align="center">title: {{itemGoods.title}}</h3>
-            <h3 align="center">description: {{itemGoods.description}}</h3>
-            <h3 align="center">picture: {{itemGoods.picture}}</h3>
-            <h3 align="center">price: {{itemGoods.price}}</h3>
+    <div ng-show="isNotFound"><h3 align="center">No results found :(</h3></div>
+
+    <div class="row equal" ng-repeat="letter in listGoods track by $index" ng-if="$index % 4 == 0">
+        <div class="col-md-3" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3];" ng-if="listGoods[i] != null">
+            <div class="panel panel-default my-panel">
+                <div class="panel-body">
+                    <img ng-click="openModalDialogButton(listGoods[i].id)" src="{{listGoods[i].picture}}" class="img-responsive img-rounded center-block">
+                    <div class="caption">
+                        <h4>{{listGoods[i].name}}</h4>
+                        <p><label>Price: {{listGoods[i].price}} $</label></p>
+                        <label>Rating:</label>
+                        <div class="btn-group btn-group-xs">
+                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
+                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
+                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
+                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
+                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
+                        </div>
+                        <div class="text-center">
+                            <div class="btn-group btn-group">
+                                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-th-list"></span> Comp</button>
+                                <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Save</button>
+                                <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart"></span> Shop</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <p>{{searchFilteredListGoods.length}}</p>
 
+    <div id="modalDialog{{itemGoods.id}}" class="modal fade" ng-repeat="itemGoods in listGoods">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{itemGoods.name}}</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{{itemGoods.picture}}" class="img-responsive img-rounded center-block">
+                    <p><label>Price: {{itemGoods.price}} $</label></p>
+                    <h4>{{itemGoods.description}}</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

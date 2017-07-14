@@ -10,3 +10,12 @@
     display: inline-block;
     float: none;
 }
+.my-panel:hover {
+    background: #F8F8F8;
+    cursor: pointer;
+}
+.equal {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
