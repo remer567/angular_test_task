@@ -106,6 +106,13 @@
                             <button type="button" class="btn btn-default" ng-disabled="isDisableNextPageButton()" ng-click="nextPageClick()">></button>
 
                         </li>
+
+                        <li class="navbar-form">
+                            <div class="btn-group btn-group">
+                                <button type="button" class="btn btn-primary">Log in</button>
+                                <button type="button" class="btn btn-success">Sign up</button>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -115,28 +122,24 @@
     <div ng-show="isNotFound"><h3 align="center">No results found :(</h3></div>
 
     <div class="row equal" ng-repeat="letter in listGoods track by $index" ng-if="$index % 4 == 0">
-        <div class="col-md-3" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3];" ng-if="listGoods[i] != null">
-            <div class="panel panel-default my-panel">
-                <div class="panel-body">
-                    <img ng-click="openModalDialogButton(listGoods[i].id)" src="{{listGoods[i].picture}}" class="img-responsive img-rounded center-block">
-                    <div class="caption">
-                        <h4>{{listGoods[i].name}}</h4>
-                        <p><label>Price: {{listGoods[i].price}} $</label></p>
-                        <label>Rating:</label>
-                        <div class="btn-group btn-group-xs">
-                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
-                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
-                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
-                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
-                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
-                        </div>
-                        <div class="text-center">
-                            <div class="btn-group btn-group">
-                                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-th-list"></span> Comp</button>
-                                <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Save</button>
-                                <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart"></span> Shop</button>
-                            </div>
-                        </div>
+        <div class="col-md-3 col-margin" ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3];" ng-if="listGoods[i] != null">
+            <img ng-click="openModalDialogButton(listGoods[i].id)" src="{{listGoods[i].picture}}" class="img-responsive img-rounded center-block img-fix-height-300 img-cur-pointer">
+            <div class="caption">
+                <h4>{{listGoods[i].name}}</h4>
+                <p><label>Price: {{listGoods[i].price}} $</label></p>
+                <label>Rating:</label>
+                <div class="btn-group btn-group-xs">
+                    <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
+                    <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
+                    <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
+                    <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
+                    <button type="button" class="btn btn-info"><span class="glyphicon glyphicon glyphicon-star"></span></button>
+                </div>
+                <div class="text-center">
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-th-list"></span> Comp</button>
+                        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Save</button>
+                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart"></span> Shop</button>
                     </div>
                 </div>
             </div>

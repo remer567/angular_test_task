@@ -10,12 +10,18 @@
     display: inline-block;
     float: none;
 }
-.my-panel:hover {
-    background: #F8F8F8;
-    cursor: pointer;
-}
 .equal {
     display: flex;
     display: -webkit-flex;
     flex-wrap: wrap;
+}
+.col-margin {
+    margin-bottom: 20px;
+}
+.img-fix-height-300 {
+    display: block;
+    height: 300px;
+}
+.img-cur-pointer:hover {
+    cursor: pointer;
 }
